@@ -1,4 +1,9 @@
 //checking quotas
+var MAX_CLOUDLET = "environment.maxcloudletsperrec",
+    SAME_NODES = "environment.maxsamenodescount",
+    MAX_NODES = "environment.maxnodescount",
+    SSL = "environment.jelasticssl.enabled";
+
 var perEnv = "environment.maxnodescount",
     maxEnvs = "environment.maxcount",
     perNodeGroup = "environment.maxsamenodescount",
@@ -18,7 +23,7 @@ var perEnv = "environment.maxnodescount",
 var hasCollaboration = (parseInt('${fn.compareEngine(7.0)}', 10) >= 0),
     quotas = [], group;
 
-if (hasCollaboration) {
+if (true) {
     quotas = [
         { quota : { name: perEnv }, value: parseInt('${quota.environment.maxnodescount}', 10) },
         { quota : { name: maxEnvs }, value: parseInt('${quota.environment.maxcount}', 10) },
@@ -28,8 +33,8 @@ if (hasCollaboration) {
     ];
     group = { groupType: '${account.groupType}' };
 } else {
-    quotas = jelastic.billing.account.GetQuotas(perEnv + ";"+maxEnvs+";" + perNodeGroup + ";" + maxCloudletsPerRec + ";" + diskIOPSlimit).array;
-    group = jelastic.billing.account.GetAccount(appid, session);g
+    quotas = jelastic.billing.account.GetQuotas(MAX_NODES + ";" + SAME_NODES + ";" + MAX_CLOUDLET + ";" + SSL).array;
+    // group = jelastic.billing.account.GetAccount(appid, session);g
 }
 
 for (var i = 0, l = quotas.length; i < l; i++) {
