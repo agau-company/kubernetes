@@ -277,3 +277,5 @@ let json = {
     ]
   }
 }
+
+return json;
