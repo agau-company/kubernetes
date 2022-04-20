@@ -1,9 +1,4 @@
 //checking quotas
-var MAX_CLOUDLET = "environment.maxcloudletsperrec",
-    SAME_NODES = "environment.maxsamenodescount",
-    MAX_NODES = "environment.maxnodescount",
-    SSL = "environment.jelasticssl.enabled";
-
 var perEnv = "environment.maxnodescount",
     maxEnvs = "environment.maxcount",
     perNodeGroup = "environment.maxsamenodescount",
@@ -20,7 +15,7 @@ var perEnv = "environment.maxnodescount",
     iopsLimit = 1000,
     markup = "", cur = null, text = "used", prod = true, dev = true, prodStorage = true, devStorage = true, storage = false;
 
-var hasCollaboration = false,
+var hasCollaboration = (parseInt('${fn.compareEngine(7.0)}', 10) >= 0),
     quotas = [], group;
 
 if (hasCollaboration) {
@@ -33,8 +28,8 @@ if (hasCollaboration) {
     ];
     group = { groupType: '${account.groupType}' };
 } else {
-    quotas = jelastic.billing.account.GetQuotas(MAX_NODES + ";" + SAME_NODES + ";" + MAX_CLOUDLET + ";" + SSL).array;
-    // group = jelastic.billing.account.GetAccount(appid, session);g
+    quotas = jelastic.billing.account.GetQuotas(perEnv + ";"+maxEnvs+";" + perNodeGroup + ";" + maxCloudletsPerRec + ";" + diskIOPSlimit).array;
+    group = jelastic.billing.account.GetAccount(appid, session);
 }
 
 for (var i = 0, l = quotas.length; i < l; i++) {
@@ -80,7 +75,7 @@ for (var i = 0, l = quotas.length; i < l; i++) {
     }
 }
 var resp = {result:0};
-var url = "https://raw.githubusercontent.com/agau-company/kubernetes/main/configs/settings.yaml";
+var url = "https://raw.githubusercontent.com/jelastic-jps/kubernetes/main/configs/settings.yaml";
 resp.settings = toNative(new org.yaml.snakeyaml.Yaml().load(new com.hivext.api.core.utils.Transport().get(url)));
 var f = resp.settings.fields;
 
