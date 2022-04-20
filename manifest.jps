@@ -1,12 +1,12 @@
 type: install
-version: 1.6
-id: kubernetes_custom
+version: 1.5
+id: kubernetes
 baseUrl: https://raw.githubusercontent.com/agau-company/kubernetes/main
+targetRegions:
+  type: [ vz.*, pcs.* ]
 description:
   text: /text/description-kube.md
   short: Kubernetes cluster with automated scaling & cost efficient pay-per-use pricing for running cloud-native microservices.
-targetRegions:
-  type: [ vz.*, pcs.* ]
 categories:
   - apps/clusters
   - apps/dev-and-admin-tools
@@ -47,6 +47,8 @@ actions:
       script: |
         params = toNative(params);
         params.envGroups = eval('(' + MANIFEST + ')').envGroups;
+        if (!params.ownerUid) delete params.ownerUid;
+        return api.marketplace.jps.Install(params);
     - setGlobals:
         success_text: ${response.successText}
     - script: |
