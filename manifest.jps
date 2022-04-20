@@ -15,7 +15,7 @@ logo: /images/k8s-logo.png
 name: Kubernetes Cluster
 
 ssl: true
-onBeforeInit: /scripts/beforeinit.js?r=${fn.random}
+onBeforeInit: /scripts/beforeinit.js
 
 startPage: ${globals.start_page}
 
