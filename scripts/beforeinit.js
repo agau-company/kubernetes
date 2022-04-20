@@ -18,7 +18,7 @@ var perEnv = "environment.maxnodescount",
 var hasCollaboration = (parseInt('${fn.compareEngine(7.0)}', 10) >= 0),
     quotas = [], group;
 
-if (true) {
+if (hasCollaboration) {
     quotas = [
         { quota : { name: perEnv }, value: parseInt('${quota.environment.maxnodescount}', 10) },
         { quota : { name: maxEnvs }, value: parseInt('${quota.environment.maxcount}', 10) },
@@ -29,7 +29,7 @@ if (true) {
     group = { groupType: '${account.groupType}' };
 } else {
     quotas = jelastic.billing.account.GetQuotas(perEnv + ";"+maxEnvs+";" + perNodeGroup + ";" + maxCloudletsPerRec + ";" + diskIOPSlimit).array;
-    group = jelastic.billing.account.GetAccount(appid, session);
+    group = jelastic.billing.account.GetAccount(appid, session);g
 }
 
 for (var i = 0, l = quotas.length; i < l; i++) {

@@ -5,6 +5,8 @@ baseUrl: https://raw.githubusercontent.com/agau-company/kubernetes/main
 description:
   text: /text/description-kube.md
   short: Kubernetes cluster with automated scaling & cost efficient pay-per-use pricing for running cloud-native microservices.
+targetRegions:
+  type: [ vz.*, pcs.* ]
 categories:
   - apps/clusters
   - apps/dev-and-admin-tools
