@@ -15,7 +15,7 @@ var perEnv = "environment.maxnodescount",
     iopsLimit = 1000,
     markup = "", cur = null, text = "used", prod = true, dev = true, prodStorage = true, devStorage = true, storage = false;
 
-var hasCollaboration = (parseInt('${fn.compareEngine(7.0)}', 10) >= 0),
+var hasCollaboration = true,
     quotas = [], group;
 
 if (hasCollaboration) {
@@ -126,7 +126,7 @@ if (!prod && !dev || group.groupType == 'trial') {
     });
 }
 
-if (true) {
+if (hasCollaboration) {
     f.push({
         "type": "owner",
         "name": "ownerUid",
