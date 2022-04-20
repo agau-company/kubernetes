@@ -23,7 +23,7 @@ var perEnv = "environment.maxnodescount",
 var hasCollaboration = (parseInt('${fn.compareEngine(7.0)}', 10) >= 0),
     quotas = [], group;
 
-if (true) {
+if (false) {
     quotas = [
         { quota : { name: perEnv }, value: parseInt('${quota.environment.maxnodescount}', 10) },
         { quota : { name: maxEnvs }, value: parseInt('${quota.environment.maxcount}', 10) },
